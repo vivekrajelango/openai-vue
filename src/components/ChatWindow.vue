@@ -77,6 +77,8 @@ export default{
             this.freeText = "Please wait.... "
         },
         async checkResponse(){
+            this.inputText= '';
+            this.displayVal = '';
             const promtObj = {...this.option, prompt:this.inputVal }
             const response = await openai.createCompletion(promtObj);
             // console.log('xx', response.data.choices[0].text)
@@ -89,7 +91,6 @@ export default{
                     }
                 )
             }
-            this.inputText= ''
             this.totalIndex = this.dataArr[this.dataArr.length-1].output.length;
             this.typeWriter();
         },
