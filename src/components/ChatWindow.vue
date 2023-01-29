@@ -1,6 +1,9 @@
 <script>
 import {Configuration, OpenAIApi } from 'openai';
-import {ref, onMounted } from 'vue';
+// import {useCounterStore} from '@/stores/Counter';
+
+// const counterStore = useCounterStore();
+// import {ref, onMounted } from 'vue';
 // const transcript = ref('')
 const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const sr = new Recognition();

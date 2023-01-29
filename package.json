@@ -1,6 +1,5 @@
 {
   "name": "vue-open-ai",
-  "homepage": "http://www.vivekrajelango.in/chat",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +12,7 @@
     "bootstrap-vue": "^2.23.1",
     "dotenv": "^16.0.3",
     "openai": "^3.1.0",
+    "pinia": "^2.0.29",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
