@@ -64,7 +64,7 @@ export default{
                 top_p: 1,
                 frequency_penalty: 0.0,
                 presence_penalty: 0.6,
-                // stop: [" Human:", " AI:"],
+                stop: [" Human:", " AI:"],
             }
         }
     },
@@ -79,7 +79,7 @@ export default{
         async checkResponse(){
             const promtObj = {...this.option, prompt:this.inputVal }
             const response = await openai.createCompletion(promtObj);
-            // console.log('xx', response.data)
+            // console.log('xx', response.data.choices[0].text)
             this.outputVal = response.data.choices[0].text;
             if(response){
                 this.dataArr.push(
