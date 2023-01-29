@@ -7,9 +7,9 @@ body {
   font-size: 15px;
   background-image: url('https://cdn.discordapp.com/splashes/974519864045756446/e6d9ec039453518e00a707d5741cfd59.jpg?size=3072');
   background-size: cover;
-  /* background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   /* width: 1440px; */
-  /* height: 810px; */
+  height: 700px;
   /* height: auto; */
   color: #EEE;
 }
@@ -26,7 +26,7 @@ body {
 }
 pre{
   white-space:pre-wrap;
-  line-height: 1;
+  /* line-height: 1; */
 }
 
 .input-group-text{

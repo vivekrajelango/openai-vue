@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-    <!-- <h1 class="mb-3">Vue - Playground</h1> -->
     <div class="col-sm-5 mt-5 ">
         <div class="card text-dark bg-light">
             <h5 class="card-header">AI Playground</h5>
@@ -9,13 +8,14 @@
                 <pre class="card-text">{{ item.output}}</pre>
             </div> -->
             <div class="card-body">
-                <h5 class="card-title" v-if="this.inputVal">Q: {{ this.inputVal }}</h5>
-                <pre v-if="this.freeText">A: {{this.displayVal ? this.displayVal : this.freeText}}</pre>
+                <h5 class="card-title" v-if="this.inputBindVal">Q: {{ this.inputBindVal }}</h5>
+                <pre v-if="this.inputBindVal">{{this.displayVal ? this.displayVal : this.freeText}}</pre>
             </div>
         </div>  
     </div>
-    <div class="col-sm-5 mt-3 text-center">
-        <input class="form-control form-control-lg" v-model="inputText" @change="inputHandler" type="text" placeholder="ask me any question">
+    <div class="col-sm-5 mt-2">
+        <input class="form-control form-control-lg" v-model="inputText" @keyup="inputHandler" type="text" placeholder="ask me any question">
+        <small class="text-left">Minimun 7 characters</small>
         <!-- <div class="input-group mb-2 form-control">
             <div class="input-group-prepend">
                 <div class="input-group-text playIcon" @click="listenItem">
@@ -26,7 +26,10 @@
             </div>
             <input class="form-control" v-model="inputText" @change="inputHandler" type="text" placeholder="ask me any question">
         </div> -->
-        <button class="btn btn-primary mt-3" @click="checkResponse">Check response</button>
+        
+    </div>
+    <div class="col-sm-5 text-center">
+        <button class="btn btn-primary mt-3" @click="checkResponse" ref="buttonRef">Check response</button>
     </div>
     </div>
 </template>
@@ -46,6 +49,7 @@ export default{
             inputVal: '',
             inputText:'',
             outputVal: '',
+            inputBindVal:'',
             displayVal:'',
             freeText:'',
             indexVal: 0,
@@ -69,34 +73,44 @@ export default{
         }
     },
     mounted(){
-        // this.typeWriter();
+        this.$refs.buttonRef.disabled = true;
     },
     methods:{
         inputHandler(e){ 
-            this.inputVal = e.target.value;
+            this.inputVal = e.target.value+'?';
+            if(this.inputVal.length>7){
+                this.$refs.buttonRef.disabled = false;
+            } else {
+                this.$refs.buttonRef.disabled = true;
+            }
             this.freeText = "Please wait.... "
         },
         async checkResponse(){
-            this.inputText= '';
+            this.inputBindVal = this.inputVal;
             this.displayVal = '';
+            this.inputText= '';
+            this.$refs.buttonRef.disabled = true;
             const promtObj = {...this.option, prompt:this.inputVal }
             const response = await openai.createCompletion(promtObj);
             // console.log('xx', response.data.choices[0].text)
             this.outputVal = response.data.choices[0].text;
-            if(response){
-                this.dataArr.push(
-                    {
-                        input: this.inputVal,
-                        output: this.outputVal
-                    }
-                )
-            }
-            this.totalIndex = this.dataArr[this.dataArr.length-1].output.length;
+            // console.log('xxxx', this.outputVal.length)
+            // if(response){
+            //     this.dataArr.push(
+            //         {
+            //             input: this.inputVal,
+            //             output: this.outputVal
+            //         }
+            //     )
+            // }
+            // this.totalIndex = this.dataArr[this.dataArr.length-1].output.length;
+            this.indexVal = 0;
+            this.totalIndex = this.outputVal.length;
             this.typeWriter();
         },
         typeWriter() { 
             if (this.indexVal < this.totalIndex) { 
-                this.displayVal += this.dataArr[this.dataArr.length-1].output.charAt(this.indexVal);
+                this.displayVal += this.outputVal.charAt(this.indexVal);
                 this.indexVal++;
                 setTimeout(this.typeWriter, 50);
             }
