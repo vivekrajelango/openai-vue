@@ -21,7 +21,7 @@ const showHandler=(params)=>{
 </script>
 
 <template>
-   <div class="container-fluid">
+   <div class="container-fluid mt-2">
     <div class="row flex-nowrap">
         <div class="col-auto px-0">
             <div id="sidebar" class="collapse collapse-horizontal border-end" ref="classNameRef">
