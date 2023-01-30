@@ -10,8 +10,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'playground',
-      component: Playground
+      name: 'home',
+      component: HomeView
     },
     {
       path: '/chat',
@@ -19,9 +19,9 @@ const router = createRouter({
       component: ChatWindow
     },
     {
-      path: '/home',
-      name: 'home',
-      component: HomeView
+      path: '/playground',
+      name: 'playground',
+      component: Playground
     },
     {
       path: '/dashboard',
