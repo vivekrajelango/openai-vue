@@ -4,6 +4,7 @@ import DashboardView from '../views/DashboardView.vue'
 import ChatWindow from '../components/ChatWindow.vue'
 import CompositionView from '../components/Composition.vue'
 import Playground from '../components/Playground.vue'
+import Chart from '../components/Chart.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,11 @@ const router = createRouter({
       path: '/chat',
       name: 'chat',
       component: ChatWindow
+    },
+    {
+      path: '/chart',
+      name:'chart',
+      component: Chart
     },
     {
       path: '/playground',
